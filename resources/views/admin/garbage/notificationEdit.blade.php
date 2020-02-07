@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
-@section('title','収集日通知作成')
+@section('title','通知編集')
 @section('content')
     <div class="container">
         <div class="row">
+            <h2>通知編集</h2>
             <div class="col-md-8 mx-auto">
-                <h2>収集日通知作成</h2>
-                <form action="{{ action('Admin\GarbageController@notificationCreate') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ action('Admin\GarbageController@update') }}" method="post" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
-                            @foreach ($errors->all() as $e)
+                            @foreach($errors->all() as $e)
                                 <li>{{ $e }}</li>
                             @endforeach
                         </ul>
-                    @endif
+                    @endif 
                     <div class="form-group row">
                         <label class="col-md-2">回収曜日</label>
-                        <select class="dayOf" name="dayOf">
+                        <select class="dayOf" name="dayOf" value="{{ $garbage_form->dayOf }}">
                             <option value="月曜">月曜日</option>
                             <option value="火曜">火曜日</option>
                             <option value="水曜">水曜日</option>
@@ -26,8 +26,8 @@
                             <option value="日曜">日曜日</option>
                         </select>
                     </div>
-                    <div class="form-group row"> 
-                        <label class="col-md-2">ゴミの種類</label>
+                    <div class="form-group row">
+                        <label class="col-md-2">種類</label>
                         <select class="garbageType" name="garbageType">
                             <option value="可燃">可燃</option>
                             <option value="不燃">不燃</option>
@@ -38,17 +38,15 @@
                     <div class="form-group row">
                         <label class="col-md-2">メモ</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
+                            <textarea class="form-control" name="body" rows="10">{{ $garbage_form->body }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
-                    <label class="col-md-2">通知日</label>
+                        <label class="col-md-2">通知日</label>
                         <div class="col-md-10">
-                        <input type="datetime-local" name="notification_date" step="300">
+                        <input type="datetime-local" name="notification_date" step="300" value="{{ $garbage_form->notification_date }}">
                         </div>
                     </div>
-                    {{ csrf_field() }}
-                    <input type="submit" class="btn btn-primary" value="作成">
                 </form>
             </div>
         </div>
