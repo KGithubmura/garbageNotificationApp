@@ -51,7 +51,7 @@
                     <table class="table table-bordered text-muted bg-light">
                       <thead>
                         <tr>
-                          @foreach (['日', '月', '火', '水', '木', '金', '土'] as $dayOfWeek)
+                          @foreach ($week as $dayOfWeek)
                           @if ($dayOfWeek == '日')
                           <th width="10%" class="text-danger">{{ $dayOfWeek }}</th>
                           @elseif($dayOfWeek == '土')
@@ -69,9 +69,18 @@
                         @endif
                           <td>
                             @if ($date->month != $currentMonth)
-                            <div class="alert alert-secondary">{{ $date->day }}</div>
+                            <div class="alert alert-secondary">
+                                {{ $date->day }}
+                            </div>
                             @else
-                            <div class="alert alert-light">{{ $date->day }}</div>
+                            <div class="alert alert-light">
+                                {{ $date->day }}
+                                @foreach($garbageQuery as $garbage)
+                                    @if (strpos($garbage->dayOf, $week[$date->format('w')]) !== false)
+                                        {{ str_limit($garbage->garbageType) }}
+                                    @endif
+                                @endforeach
+                            </div>
                             @endif
                           </td>
                         @if ($date->dayOfWeek == 6)

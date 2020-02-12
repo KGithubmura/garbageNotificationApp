@@ -32,8 +32,7 @@ class GarbageController extends Controller
     public function notificationIndex(Request $request)
     {
         $garbageQuery = Garbage::all();
-        //dd($garbageQuery);
-        
+        $week = ['日', '月', '火', '水', '木', '金', '土'];
         $year = date('Y');
         $month = date('m');
         $currentMonth = date('m');
@@ -52,7 +51,7 @@ class GarbageController extends Controller
             $dates[] = $date->copy();
         }
     
-        return view('admin.garbage.notificationIndex',['garbageQuery' => $garbageQuery, 'dates' => $dates, 'currentMonth' => $currentMonth, 'year' => $year]);   
+        return view('admin.garbage.notificationIndex', compact('garbageQuery', 'dates', 'currentMonth', 'year', 'week'));   
     }
     
     public function notificationEdit(Request $request)
@@ -61,8 +60,23 @@ class GarbageController extends Controller
         if (empty($garbage)) {
             abort('404');
         }
+        $selectWeek = [
+            '月曜' => '月曜日',
+            '火曜' => '火曜日',
+            '水曜' => '水曜日',
+            '木曜' => '木曜日',
+            '金曜' => '金曜日',
+            '土曜' => '土曜日',
+            '日曜' => '日曜日',
+        ];
         
-        return view('admin.garbage.notificationEdit',['garbage_form' => $garbage]);
+        $selectType= [
+            '可燃' => '可燃',
+            '不燃' => '不燃',
+            '埋め立て' => '埋め立て',
+            '資源' => '資源',
+        ];
+        return view('admin.garbage.notificationEdit', compact('garbage', 'selectWeek', 'selectType'));
     }
     
     public function notificationDelete(Request $request)

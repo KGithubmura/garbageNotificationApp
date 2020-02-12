@@ -16,35 +16,45 @@
                     @endif 
                     <div class="form-group row">
                         <label class="col-md-2">回収曜日</label>
-                        <select class="dayOf" name="dayOf" value="{{ $garbage_form->dayOf }}">
-                            <option value="月曜">月曜日</option>
-                            <option value="火曜">火曜日</option>
-                            <option value="水曜">水曜日</option>
-                            <option value="木曜">木曜日</option>
-                            <option value="金曜">金曜日</option>
-                            <option value="土曜">土曜日</option>
-                            <option value="日曜">日曜日</option>
+                        <select class="dayOf" name="dayOf" value="{{ $garbage->dayOf }}">
+                            @foreach ($selectWeek as $key => $val)
+                                @if ($garbage->dayOf == $key)
+                                    <option value="{{ $key }}" selected >{{ $val }}</option>
+                                @else 
+                                    <option value="{{ $key }}">{{ $val }}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">種類</label>
                         <select class="garbageType" name="garbageType">
-                            <option value="可燃">可燃</option>
-                            <option value="不燃">不燃</option>
-                            <option value="資源">資源</option>
-                            <option value="埋め立て">埋め立て</option>
+                            @foreach ($selectType as $key => $val)
+                                @if ($garbage->garbageType == $key)
+                                    <option value="{{ $key }}" selected >{{ $val }}</option>
+                                @else
+                                    <option value="{{ $key }}">{{ $val }}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">メモ</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="body" rows="10">{{ $garbage_form->body }}</textarea>
+                            <textarea class="form-control" name="body" rows="10">{{ $garbage->body }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">通知日</label>
                         <div class="col-md-10">
-                        <input type="datetime-local" name="notification_date" step="300" value="{{ $garbage_form->notification_date }}">
+                        <input type="datetime-local" name="notification_date" step="300" value="{{ $garbage->notification_date }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input type="hidden" name="id" value="{{ $garbage->id }}">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-primary" value="更新">
                         </div>
                     </div>
                 </form>
