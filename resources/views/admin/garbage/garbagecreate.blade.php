@@ -41,12 +41,6 @@
                             <textarea class="form-control" name="body" rows="10">{{ old('body') }}</textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
-                    <label class="col-md-2">通知日</label>
-                        <div class="col-md-10">
-                        <input type="datetime-local" name="notification_date" step="300">
-                        </div>
-                    </div>
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="作成">
                 </form>

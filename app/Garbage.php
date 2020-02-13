@@ -10,7 +10,5 @@ class Garbage extends Model
     public static $rules = array(
         'garbageType' => 'required',
         'dayOf' => 'required',
-        'notification_date' => 'required',
     );
-    
 }

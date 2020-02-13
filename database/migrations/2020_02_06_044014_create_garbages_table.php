@@ -18,7 +18,6 @@ class CreateGarbagesTable extends Migration
             $table->String('garbageType');
             $table->String('dayOf');
             $table->String('body')->nullable();
-            $table->Date('notification_date');
             $table->timestamps();
         });
     }

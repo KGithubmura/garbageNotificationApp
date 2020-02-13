@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     Route::get('garbage/notificationEdit', 'Admin\GarbageController@notificationEdit');
     Route::post('garbage/notificationEdit', 'Admin\GarbageController@update');
     Route::get('garbage/notificationDelete', 'Admin\GarbageController@notificationDelete');
+    Route::get('/mail','Admin\GarbageController@notificationIndex');
 });
 
 

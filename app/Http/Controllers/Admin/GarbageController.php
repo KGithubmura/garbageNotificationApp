@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Garbage;
+use App\Mail\GarbageMail;
+use Illuminate\Support\Facades\Mail;
 
 use Carbon\Carbon;
 
@@ -25,12 +27,17 @@ class GarbageController extends Controller
         unset($form['_token']);
         
         $garbage->fill($form)->save();
-        
         return redirect ('admin/garbage/notificationCreate');
     }
     
     public function notificationIndex(Request $request)
     {
+        $contact = $request->all();
+        
+        //dd($contact->dayOf);
+        Mail::to("7kamimura74@gmail.com")
+                    ->send(new GarbageMail($contact)); // 引数にリクエストデータを渡す
+                    
         $garbageQuery = Garbage::all();
         $week = ['日', '月', '火', '水', '木', '金', '土'];
         $year = date('Y');
@@ -53,6 +60,18 @@ class GarbageController extends Controller
     
         return view('admin.garbage.notificationIndex', compact('garbageQuery', 'dates', 'currentMonth', 'year', 'week'));   
     }
+    
+    /*public function notificationMail(Request $request)
+    {
+        $garbageQuery = Garbage::all();
+        // フォームからのリクエストデータ全てを$contactに代入
+        $contact = $request->all();
+        //dd($contact);
+        Mail::to("7kamimura74@gmail.com")
+                    ->send(new GarbageMail($contact)); // 引数にリクエストデータを渡す
+        
+        return view('admin.garbage.notificationIndex', compact('dayOf', 'garbageQuery'));
+    }*/
     
     public function notificationEdit(Request $request)
     {

@@ -21,8 +21,8 @@
                             <th width="10%">曜日</th>
                             <th width="10%">種類</th>
                             <th width="20%">メモ</th>
-                            <th width="10%">通知時間</th>
                             <th width="10%">操作</th>
+                            <th width="10%">メール送信</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,13 +32,17 @@
                                         <td>{{ str_limit($garbage->dayOf) }}</td>
                                         <td>{{ str_limit($garbage->garbageType) }}</td>
                                         <td>{{ str_limit($garbage->body) }}</td>
-                                        <td>{{ str_limit($garbage->notification_date) }}</td>
                                         <td>
                                             <div>
                                                 <a href="{{ action('Admin\GarbageController@notificationEdit',['id' => $garbage->id]) }}">編集</a>
                                             </div>
                                             <div>
                                                 <a href="{{ action('Admin\GarbageController@notificationDelete',['id' => $garbage->id]) }}">削除</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <a href="{{ action('Admin\GarbageController@notificationIndex', ['dayOf' => $garbage->dayOf, 'garbageType' => $garbage->garbageType, 'body' => $garbage->body]) }}">送信</a>
                                             </div>
                                         </td>
                                     </tr>

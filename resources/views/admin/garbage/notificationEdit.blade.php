@@ -45,12 +45,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2">通知日</label>
-                        <div class="col-md-10">
-                        <input type="datetime-local" name="notification_date" step="300" value="{{ $garbage->notification_date }}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <div class="col-md-10">
                             <input type="hidden" name="id" value="{{ $garbage->id }}">
                             {{ csrf_field() }}
