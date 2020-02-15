@@ -18,13 +18,14 @@ class GarbageMail extends Mailable
      */
     // 引数で受け取ったデータ用の変数
     protected $contact;
-
+    
+    
     public function __construct($contact)
     {
-      // 引数で受け取ったデータを変数にセット
-      $this->contact = $contact;
+        $this->contact = $contact;
     }
-
+    
+    
     /**
      * Build the message.
      *

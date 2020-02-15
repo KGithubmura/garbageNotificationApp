@@ -1,1 +1,1 @@
-明日はの回収日です
+明日{{ $contact["dayOf"] }}は{{ $contact["garbageType"] }}の回収日です

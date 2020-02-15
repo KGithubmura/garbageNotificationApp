@@ -42,7 +42,7 @@
                                         </td>
                                         <td>
                                             <div>
-                                                <a href="{{ action('Admin\GarbageController@notificationIndex', ['dayOf' => $garbage->dayOf, 'garbageType' => $garbage->garbageType, 'body' => $garbage->body]) }}">送信</a>
+                                                <a href="{{ action('Admin\GarbageController@notificationMail', ['dayOf' => $garbage->dayOf, 'garbageType' => $garbage->garbageType, 'body' => $garbage->body]) }}">送信</a>
                                             </div>
                                         </td>
                                     </tr>

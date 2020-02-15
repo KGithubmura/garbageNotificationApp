@@ -32,12 +32,6 @@ class GarbageController extends Controller
     
     public function notificationIndex(Request $request)
     {
-        $contact = $request->all();
-        
-        //dd($contact->dayOf);
-        Mail::to("7kamimura74@gmail.com")
-                    ->send(new GarbageMail($contact)); // 引数にリクエストデータを渡す
-                    
         $garbageQuery = Garbage::all();
         $week = ['日', '月', '火', '水', '木', '金', '土'];
         $year = date('Y');
@@ -61,17 +55,18 @@ class GarbageController extends Controller
         return view('admin.garbage.notificationIndex', compact('garbageQuery', 'dates', 'currentMonth', 'year', 'week'));   
     }
     
-    /*public function notificationMail(Request $request)
+    
+    public function notificationMail(Request $request)
     {
-        $garbageQuery = Garbage::all();
-        // フォームからのリクエストデータ全てを$contactに代入
         $contact = $request->all();
-        //dd($contact);
+       
+        //dd($contact["garbageType"]);
         Mail::to("7kamimura74@gmail.com")
                     ->send(new GarbageMail($contact)); // 引数にリクエストデータを渡す
         
-        return view('admin.garbage.notificationIndex', compact('dayOf', 'garbageQuery'));
-    }*/
+        return redirect('admin/garbage/');
+                    
+    }
     
     public function notificationEdit(Request $request)
     {
