@@ -14,7 +14,23 @@ class GarbageController extends Controller
 {
     public function add()
     {
-        return view('admin.garbage.garbagecreate');
+        $selectWeek = [
+            '月曜' => '月曜日',
+            '火曜' => '火曜日',
+            '水曜' => '水曜日',
+            '木曜' => '木曜日',
+            '金曜' => '金曜日',
+            '土曜' => '土曜日',
+            '日曜' => '日曜日',
+        ];
+        
+        $selectType= [
+            '可燃' => '可燃',
+            '不燃' => '不燃',
+            '埋め立て' => '埋め立て',
+            '資源' => '資源',
+        ];
+        return view('admin.garbage.garbagecreate',compact('selectWeek', 'selectType'));
     }
     
     public function notificationCreate(Request $request)
@@ -22,6 +38,7 @@ class GarbageController extends Controller
         //$user = Auth::user();
         $this->validate($request, Garbage::$rules);
         $garbage = new Garbage;
+
         $form = $request->all();
         
         unset($form['_token']);
@@ -82,7 +99,7 @@ class GarbageController extends Controller
             '金曜' => '金曜日',
             '土曜' => '土曜日',
             '日曜' => '日曜日',
-        ];
+        ];                                      //viewで書いてもいいが、コントローラーに書いた方が綺麗でわかりやすい
         
         $selectType= [
             '可燃' => '可燃',

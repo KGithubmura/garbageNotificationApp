@@ -17,22 +17,17 @@
                     <div class="form-group row">
                         <label class="col-md-2">回収曜日</label>
                         <select class="dayOf" name="dayOf">
-                            <option value="月曜">月曜日</option>
-                            <option value="火曜">火曜日</option>
-                            <option value="水曜">水曜日</option>
-                            <option value="木曜">木曜日</option>
-                            <option value="金曜">金曜日</option>
-                            <option value="土曜">土曜日</option>
-                            <option value="日曜">日曜日</option>
+                            @foreach ($selectWeek as $key => $val)
+                                <option value="{{ $key }}">{{ $val }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group row"> 
                         <label class="col-md-2">ゴミの種類</label>
                         <select class="garbageType" name="garbageType">
-                            <option value="可燃">可燃</option>
-                            <option value="不燃">不燃</option>
-                            <option value="資源">資源</option>
-                            <option value="埋め立て">埋め立て</option>
+                            @foreach ($selectType as $key => $val)
+                                <option value="{{ $key }}">{{ $val }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="form-group row">
